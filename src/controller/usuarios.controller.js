@@ -3,37 +3,25 @@ import path from 'path';
 
 import { Usuario } from '../models/usuarios.model.js';
 import { Storage } from '../models/storage.model.js'
-import bcrypt from 'bcrypt'
 
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
-
-// Usuario.pre('save', function(next) {
-//     if (!this.isModified('password')) return next();
-
-//     bcrypt.hash(this.password, 10, (err, hash) => {
-//         if (err) return next(err);
-//         this.password = hash;
-//         next();
-//     });
-// });
-
-// Método para comparar la contraseña
-// Usuario.methods.comparePassword = function(candidatePassword) {
-//     return bcrypt.compare(candidatePassword, this.password);
-// };
-
-//funcion para traer todos los usuarios
 export const getAllUsuarios = async (req,res) => {
 
     try {
         
-        const users = await Usuario.find({}).select('-password')//para traer usuarios sin la contraseña
+        const users = await Usuario.find({}).select('-password').populate("foto");
 
-        res.status(200).json(users)
+        res.status(200).json({
+            message: "Usuarios obtenidos correctamente.",
+            users
+        })
 
     } catch (error) {
-        res.status(500).json({ message: 'An error occurred get the users', error: error.message });
+        res.status(500).json({
+            message: 'An error occurred get the users',
+            error: error.message
+        });
     }
 
 }
