@@ -18,7 +18,7 @@ import { mongoConnection } from "./DB/mongoDB.js";
 import userRouter from "./router/users.js";
 import variedadesRouter from "./router/variedad.js";
 import tipoProcesoRouter from "./router/tipoProceso.js";
-import maquinaRouter from "./router/maquina.js";
+import maquinaRouter from "./router/maquina.router.js";
 import lotesRouter from "./router/loteCafe.js";
 import seguimientoRouter from "./router/seguimiento.js";
 import datosRouter from "./router/datos.js";
