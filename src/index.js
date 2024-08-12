@@ -5,9 +5,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import { config } from "dotenv";
+import morgan from "morgan";
 
 const app = express();
 config();
+app.use(morgan("dev"));
 
 // mongoDB
 import { mongoConnection } from "./DB/mongoDB.js";
@@ -20,7 +22,7 @@ import maquinaRouter from "./router/maquina.js";
 import lotesRouter from "./router/loteCafe.js";
 import seguimientoRouter from "./router/seguimiento.js";
 import datosRouter from "./router/datos.js";
-import authRouter from "./router/auth.js";
+import authRouter from "./router/auth.router.js";
 import storageRouter from "./router/storage.js";
 
 const port = process.env.PORT || 8000;

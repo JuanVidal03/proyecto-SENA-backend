@@ -2,7 +2,7 @@ import express from 'express';
 import { Seguimiento } from '../models/seguimiento.js';
 import { Maquina } from '../models/maquina.js';
 import { Lotes } from '../models/loteCafe.js';
-import { Usuario } from '../models/usuarios.js';
+import { Usuario } from '../models/usuarios.model.js';
 import { TiposProcesos } from '../models/tipoProceso.js';
 const seguimientoRouter = express.Router();
 

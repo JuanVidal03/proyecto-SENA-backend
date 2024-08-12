@@ -5,86 +5,106 @@ import { Storage } from '../models/storage.js';
 const authRouter = express.Router();
 import jwt from 'jsonwebtoken';
 // modelos
-import { Usuario } from '../models/usuarios.js';
+import { Usuario } from '../models/usuarios.model.js';
 // importar modelo jwt
 import { createAccesToken } from '../utils/jwt.js';
-const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:8000';
+const PUBLIC_URL = process.env.PUBLIC_URL;
 
 
-// Ruta para registrar usuario
 authRouter.post('/register', uploadMiddleware.single("foto"), async (req, res) => {
 
-    // const { username, email, password, cedula, nombreCompleto, telefono, direccion, estado, foto, tipoUsuario } = req.body;
     const { body, file } = req;
     let fotoId;
 
     try {
 
+        const userEmail = await Usuario.findOne({ email: body.email });
+        const userUsername = await Usuario.findOne({ username: body.username });
+        const userCedula = await Usuario.findOne({ cedula: body.cedula });
+
+        if (userEmail) return res.status(400).json({ message: `El usuario con email ${body.email} ya existe.` });
+        if (userUsername) return res.status(400).json({ message: `El usuario con username ${body.username} ya existe.` });
+        if (userCedula) return res.status(400).json({ message: `El usuario con cedula ${body.cedula} ya existe.` });
+
+        // almacenar la imagen
         if (!file) {
-            // Si no se sube una foto, utilizar la foto por defecto
+
             const fileData = {
-                url: `${PUBLIC_URL}/usuario-undefined.png`, //url definida en controlador storage
+                url: `${PUBLIC_URL}/usuario-undefined.png`,
                 filename: 'usuario-undefined.png'
             };
 
-            // Buscar o guardar la foto por defecto en la colección storage
             let fileSaved = await Storage.findOne({ filename: 'usuario-undefined.png' });
             if (!fileSaved) {
                 fileSaved = await Storage.create(fileData);
             }
             fotoId = fileSaved._id;
+
         } else {
             const fileData = {
                 url: `${PUBLIC_URL}/${file.filename}`,
                 filename: file.filename
             };
 
-            // Guardar el archivo en la colección storage
             const fileSaved = await Storage.create(fileData);
             fotoId = fileSaved._id;
         }
 
-        // Crear usuario vinculando id foto
         const userData = {
             ...body,
             foto: fotoId
         };
-
-        // Verificar si el usuario ya existe
-        let user = await Usuario.findOne({ email: userData.email });
-        if (user) {
-            return res.status(400).json({ message: 'El usuario ya existe!' });
-        }
-
-        // Crear el usuario con la contraseña encriptada
-        user = new Usuario(userData);
+        
+        const user = new Usuario(userData);
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(userData.password, salt);
 
         await user.save();
 
-        const token = await createAccesToken({id:user._id});
-        res.cookie("token", token);
-        res.status(200).json({username, email, cedula, nombreCompleto, telefono, direccion, estado, foto, tipoUsuario});
+        res.status(200).json({
+            username: user.username,
+            cedula: user.cedula,
+            nombreCompleto: user.nombreCompleto,
+            telefono: user.telefono,
+            direccion: user.direccion,
+            email: user.email,
+            estado: user.estado,
+            foto: user.foto,
+            tipoUsuario: user.tipoUsuario
+        });
 
     } catch (error) {
-        res.status(500).json({ message: "Error al crear el usuario", error: error.message });
+        res.status(500).json({
+            message: "Error al crear el usuario",
+            error: error.message
+        });
     }
 });
 
-
-// para el ingreso a la aplicacion
 authRouter.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        let user = await Usuario.findOne({ email }).populate('foto');
-        if(!user) return res.status(400).json({ message: 'Contraseña o usuario incorrectos.' });
 
-        const comparePassword = await bcrypt.compare(password, user.password);
+    const { email, password } = req.body;
+    
+    try {
+        const userFound = await Usuario.findOne({ email });
+        if(!userFound) return res.status(404).json({ message: `El usuario '${email}' no existe.` });
+
+        const comparePassword = await bcrypt.compare(password, userFound.password);
         if(comparePassword === false) return res.status(400).json({message: 'Contraseña o usuario incorrectos.'});
 
-        // generar token
+        const user = {
+            _id: userFound._id,
+            username: userFound.username,
+            cedula: userFound.cedula,
+            nombreCompleto: userFound.nombreCompleto,
+            telefono: userFound.telefono,
+            direccion: userFound.direccion,
+            email: userFound.email,
+            estado: userFound.estado,
+            foto: userFound.foto
+        };
+
         const token = await createAccesToken({ id: user._id, rol: user.tipoUsuario });
 
         res.cookie("token", token, {
@@ -95,18 +115,21 @@ authRouter.post('/login', async (req, res) => {
         res.status(200).json({user, token});
 
     } catch (error) {
-        console.log('Error al ingresar a la aplicacion!');
-        console.log(error);
-        res.status(500).json(error);
+
+        res.status(500).json({
+            error: error.message,
+            message: "Error al ingresar a la aplicacion."
+        });
+
     }
-})
+});
 
-
-// verificar el token
 authRouter.get('/verify-token', async (req, res) => {
 
+    const { token } = req.cookies;
+
     try {
-        const { token } = req.cookies;
+
         if(!token) return res.status(400).json({message: "Sin autorizacion"});
 
         jwt.verify(token, process.env.TOKEN_SECRET, async (err, user) => {
@@ -117,17 +140,17 @@ authRouter.get('/verify-token', async (req, res) => {
             
             return res.status(200).json(foundUser);
             
-        })
+        });
         
     } catch (error) {
-        console.log("Error al verificar el token", error);
-        res.status(500).json({message: "Error al verificar el token"});
+        res.status(500).json({
+            message: "Error al verificar el token",
+            error: error.message
+        });
     }
 
-})
+});
 
-
-// salir de la aplicacion
 authRouter.post('/logout', (req, res) => {
 
     try {
@@ -138,12 +161,12 @@ authRouter.post('/logout', (req, res) => {
         res.status(200).json({message: "Sesion cerrada exitosamente!"});
 
     } catch (error) {
-        console.log(`Error al cerrar la sesion: ${error.message}`);
-        console.log(error);
-        res.status(500).json(`Error al cerrar la sesion: ${error.message}`);
+        res.status(500).json({
+            message: 'Error al cerrar la sesion',
+            error: error.message
+        });
     }
 
-})
-
+});
 
 export default authRouter;

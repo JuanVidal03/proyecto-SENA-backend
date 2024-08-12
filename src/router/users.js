@@ -1,42 +1,11 @@
 import express from "express";
-import { Usuario } from "../models/usuarios.js";
+import { Usuario } from "../models/usuarios.model.js";
 import { Storage } from "../models/storage.js";
 import uploadMiddleware from "../utils/handleStorage.js";
 
 const userRouter = express.Router();
-const PUBLIC_URL = process.env.PUBLIC_URL; 
+const PUBLIC_URL = process.env.PUBLIC_URL;
 
-// Ruta para crear usuario
-userRouter.post('/usuarios', uploadMiddleware.single("foto"), async (req, res) => {
-    const { body, file } = req;
-
-    if (!file) {
-        return res.status(400).json({ message: "No file uploaded" });
-    }
-
-    // Construir los datos del archivo para guardarlo en la colección storage
-    const fileData = {
-        url: `${PUBLIC_URL}/${file.filename}`,
-        filename: file.filename
-    };
-
-    try {
-        const fileSaved = await Storage.create(fileData);
-
-        const userData = { ...body, foto: fileSaved._id };
-
-        if (error) {
-            return res.status(400).json({ message: error.details[0].message });
-        }
-
-        const usuario = new Usuario(userData);
-        const data = await usuario.save();
-
-        res.status(201).json({ message: "Usuario creado exitosamente", data });
-    } catch (error) {
-        res.status(500).json({ message: "Error al crear el usuario", error });
-    }
-});
 
 // Ruta para actualizar un usuario por su ID
 userRouter.put('/usuarios/:id', uploadMiddleware.single("foto"), async (req, res) => {

@@ -1,29 +1,30 @@
 import mongoose from 'mongoose';
 
 const seguimientoSchema = new mongoose.Schema({
-  fecha: {
-    type: Date,
-    required: true
-  },
   maquina: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Maquina'
+  },
+  fecha: {
+    type: Date,
+    default: Date.now,
+    required: true
   },
   loteCafe: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Lotes'
   },
-  usuarios: {
+  operador: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Usuario'
+    ref: 'Usuarios'
   },
-  TipoProceso: {
+  datos: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'TiposProcesos'
+    ref: "Datos",
+    required: true
   }
 });
 

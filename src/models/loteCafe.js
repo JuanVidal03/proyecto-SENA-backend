@@ -5,12 +5,12 @@ const loteCafeSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  usuarios: {
+  proveedor: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Usuario'
   },
-  tipoProcesos: {
+  tipoProceso: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'TiposProcesos'

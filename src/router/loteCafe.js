@@ -1,7 +1,7 @@
 import express from 'express'
 import { Lotes } from '../models/loteCafe.js';
 const lotesRouter = express.Router();
-import { Usuario } from '../models/usuarios.js';
+import { Usuario } from '../models/usuarios.model.js';
 import { TiposProcesos } from '../models/tipoProceso.js';
 import { Variedades } from '../models/variedad.js';
 

@@ -1,34 +1,31 @@
 import mongoose from 'mongoose';
 
 const datoSchema = new mongoose.Schema({
-    temperatura: {
+    temperaturaAmbiente: {
         type: String,
         required: true
     },
-    temperatura_s1: {
+    temperaturaSensor: {
         type: String,
         required: true
     },
-    temperatura_s2: {
-        type: String,
+    maquina: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Maquinas",
         required: true
     },
-    temperaturaPromedio: {
-        type: String,
+    rotor: {
+        type: Boolean,
         required: true
     },
-    idMaquina: {
-        type: String,
+    motor: {
+        type: Boolean,
         required: true
     },
     fecha: {
         type: Date,
+        default: Date.now,
         required: true
-    },
-    seguimiento: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Seguimiento'
     }
 });
 
