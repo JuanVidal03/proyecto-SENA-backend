@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 import { mongoConnection } from "./DB/mongoDB.js";
 
 // rutas
-import userRouter from "./router/users.js";
+import userRouter from "./router/usuarios.router.js";
 import variedadesRouter from "./router/variedad.js";
 import tipoProcesoRouter from "./router/tipoProceso.js";
 import maquinaRouter from "./router/maquina.router.js";

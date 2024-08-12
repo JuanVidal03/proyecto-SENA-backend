@@ -1,4 +1,4 @@
-import { Storage } from "../models/storage.js";
+import { Storage } from "../models/storage.model.js";
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
     

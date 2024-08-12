@@ -1,7 +1,7 @@
 import express from 'express'
 import bcrypt from "bcrypt";
 import uploadMiddleware from '../utils/handleStorage.js';
-import { Storage } from '../models/storage.js';
+import { Storage } from '../models/storage.model.js';
 const authRouter = express.Router();
 import jwt from 'jsonwebtoken';
 // modelos
