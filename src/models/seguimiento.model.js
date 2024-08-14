@@ -19,13 +19,12 @@ const seguimientoSchema = new mongoose.Schema({
   operador: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Usuarios'
+    ref: 'Usuario'
   },
-  datos: {
+  datos: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Datos",
-    required: true
-  }
+    ref: "Datos"
+  }]
 });
 
 export const Seguimiento = mongoose.model('Seguimiento', seguimientoSchema);
