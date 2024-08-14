@@ -2,7 +2,7 @@ import express from 'express'
 import { Lotes } from '../models/loteCafe.js';
 const lotesRouter = express.Router();
 import { Usuario } from '../models/usuarios.model.js';
-import { TiposProcesos } from '../models/tipoProceso.js';
+import { TiposProcesos } from '../models/tipoProceso.model.js';
 import { Variedades } from '../models/variedad.model.js';
 
 // Crear un lote de café

@@ -3,7 +3,7 @@ import { Seguimiento } from '../models/seguimiento.js';
 import { Maquina } from '../models/maquina.model.js';
 import { Lotes } from '../models/loteCafe.js';
 import { Usuario } from '../models/usuarios.model.js';
-import { TiposProcesos } from '../models/tipoProceso.js';
+import { TiposProcesos } from '../models/tipoProceso.model.js';
 const seguimientoRouter = express.Router();
 
 // Crear un estado de máquina

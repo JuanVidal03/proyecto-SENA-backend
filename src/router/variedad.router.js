@@ -54,7 +54,7 @@ variedadesRouter.get('/variedad/:id', async (req, res) => {
     //verificar si la variedad existe
     if (!variedad) {
       return res.status(404).json({ 
-        message: "Variedad no encontrada con ese id",
+        message: "Variedad no encontrada con ese id"
       });
     }
     
