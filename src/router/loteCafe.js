@@ -8,12 +8,14 @@ import { Variedades } from '../models/variedad.model.js';
 // Crear un lote de café
 lotesRouter.post('/loteCafe', async (req, res)=>{
     try{
-        const { usuarios, tipoProcesos, variedad } = req.body
-        const usuario= await Usuario.findById(usuarios)
-        const tipoProceso= await TiposProcesos.findById(tipoProcesos)
+        const { proveedor, tipoProceso, variedad } = req.body
+        const usuario= await Usuario.findById(proveedor)
+        const tipoProcesos= await TiposProcesos.findById(tipoProceso)
         const variedades= await Variedades.findById(variedad)
 
-        if (!usuario || !tipoProceso || !variedades) {
+        console.log(usuario,tipoProcesos,variedades)
+
+        if (!usuario || !tipoProcesos || !variedades) {
             res.status(400).json({message:"el usuario,tipo proceso y variedad no existe"})
         }
 
@@ -31,9 +33,13 @@ lotesRouter.get('/loteCafe', async (req, res) => {
     try {
 
         const data = await Lotes.find()
-        .populate('tipoProcesos')
+        
+        .populate('tipoProceso')
         .populate('variedad')
-        .populate('usuarios');
+        .populate({
+            path: 'proveedor',
+            select: '-password'
+        });
 
         res.status(200).json(data);
 
@@ -49,9 +55,12 @@ lotesRouter.get('/loteCafe/:id', async (req, res) => {
     try {
 
         const data = await Lotes.findById(id)
-            .populate('tipoProcesos')
+            .populate('tipoProceso')
             .populate('variedad')
-            .populate('usuarios');
+            .populate({
+                path: 'proveedor',
+                select: '-password'
+            });
         
         res.status(200).json(data);
 
