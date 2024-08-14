@@ -23,10 +23,3 @@ const loteCafeSchema = new mongoose.Schema({
 });
 
 export const Lotes = mongoose.model('Lotes', loteCafeSchema);
-// {
-//   "peso": 50,
-//   "proveedor": "finca el sol",
-//   "tipoProceso": "", 66bcad740a9ac2dca24ae00c 66bcb353f1d5eddcc8be7b57
-//   "variedad": ""
-   
-// }
