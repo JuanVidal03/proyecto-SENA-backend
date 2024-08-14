@@ -1,7 +1,7 @@
 import express from 'express';
 import { Seguimiento } from '../models/seguimiento.model.js';
 import { Maquina } from '../models/maquina.model.js';
-import { Lotes } from '../models/loteCafe.js';
+import { Lotes } from '../models/loteCafe.model.js';
 import { Usuario } from '../models/usuarios.model.js';
 
 const seguimientoRouter = express.Router();

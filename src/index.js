@@ -19,7 +19,7 @@ import userRouter from "./router/usuarios.router.js";
 import variedadesRouter from "./router/variedad.router.js";
 import tipoProcesoRouter from "./router/tipoProceso.router.js";
 import maquinaRouter from "./router/maquina.router.js";
-import lotesRouter from "./router/loteCafe.js";
+import lotesRouter from "./router/loteCafe.router.js";
 import seguimientoRouter from "./router/seguimiento.router.js";
 import datosRouter from "./router/datos.js";
 import authRouter from "./router/auth.router.js";
