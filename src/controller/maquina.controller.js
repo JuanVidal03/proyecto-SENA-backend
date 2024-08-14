@@ -72,7 +72,7 @@ export const updateMaquinaById = async(req, res) => {
     const foundMaquina = await Maquina.findById(id);
     if(!foundMaquina) return res.status(404).json({ message: `La maquina con id: ${id} no existe.` });
 
-    const updatedMaquina = await Maquina.findByIdAndUpdate(id, { estado });
+    const updatedMaquina = await Maquina.findByIdAndUpdate(id, { estado }, { new: true });
 
     res.status(200).json({
       message: "Maquina actualizada exitosamente.",
