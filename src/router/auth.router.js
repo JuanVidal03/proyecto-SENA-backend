@@ -102,7 +102,8 @@ authRouter.post('/login', async (req, res) => {
             direccion: userFound.direccion,
             email: userFound.email,
             estado: userFound.estado,
-            foto: userFound.foto
+            foto: userFound.foto,
+            tipoUsuario: userFound.tipoUsuario
         };
 
         const token = await createAccesToken({ id: user._id, rol: user.tipoUsuario });
