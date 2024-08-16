@@ -91,7 +91,15 @@ lotesRouter.put('/loteCafe/:id', async (req, res) => {
         const loteSeguimiento = await Lotes.findById(id).populate('proveedor');
         if(!loteSeguimiento) return res.status(404).json({ message: `El lote de cafe con id: ${id} no existe.` });
 
-        if(proveedor.tipoUsuario !== "Proveedor") return res.status(400).json({ message: "El usuario no es un proveedor." });
+        const proveedorFound = await Usuario.findById(proveedor);
+        const tipoProcesoFound = await TiposProcesos.findById(tipoProceso);
+        const variedadFound = await Variedades.findById(variedad);
+
+        if(!proveedorFound) return res.status(404).json({ message: "El Proveedor no existe." });
+        if(!tipoProcesoFound) return res.status(404).json({ message: "El Tipo de proceso no existe." });
+        if(!variedadFound) return res.status(404).json({ message: "La variedad no existe no existe." });
+
+        if(proveedorFound.tipoUsuario !== "Proveedor") return res.status(400).json({ message: "El usuario no es un proveedor." });
 
         const updatedLote = await Lotes.findByIdAndUpdate(id, { peso, proveedor, tipoProceso, variedad }, { new: true })
             .populate('variedad')
