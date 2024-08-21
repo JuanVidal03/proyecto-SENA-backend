@@ -1,4 +1,4 @@
-import { Variedades } from '../models/variedad.model';
+import { Variedades } from '../models/variedad.model.js';
 
 export const createVariedad = async (req, res) => {
     const {nombre} = req.body;

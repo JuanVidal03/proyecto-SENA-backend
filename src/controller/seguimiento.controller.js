@@ -1,4 +1,4 @@
-import { Seguimiento } from "../models/seguimiento.model";
+import { Seguimiento } from "../models/seguimiento.model.js";
 import { Usuario } from '../models/usuarios.model.js';
 import { Maquina } from "../models/maquina.model.js";
 import { Lotes } from "../models/loteCafe.model.js";
