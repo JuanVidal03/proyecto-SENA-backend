@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { createDatos, deleteDatos, getAllDatos, getDatosById, updateDatos, } from '../controller/datos.controller';
+import { createDatos, deleteDatos, getAllDatos, getDatosById, updateDatos, } from '../controller/datos.controller.js';
 
 const datosRouter = Router();
 

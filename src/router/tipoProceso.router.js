@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import {createTipoProceso, getAllTipoProceso, getTipoProcesoById, updateTipoProcesoById, deletetipoProcesoId} from "../controller/tipoProceso.controller.js"
 const tipoProcesoRouter = Router();
 
 // create tipos de procesos

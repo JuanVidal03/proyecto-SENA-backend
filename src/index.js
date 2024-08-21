@@ -21,9 +21,9 @@ import tipoProcesoRouter from "./router/tipoProceso.router.js";
 import maquinaRouter from "./router/maquina.router.js";
 import lotesRouter from "./router/loteCafe.router.js";
 import seguimientoRouter from "./router/seguimiento.router.js";
-import datosRouter from "./router/datos.js";
+import datosRouter from "./router/datos.router.js";
 import authRouter from "./router/auth.router.js";
-import storageRouter from "./router/storage.js";
+import storageRouter from "./router/storage.router.js";
 
 const port = process.env.PORT || 8000;
 

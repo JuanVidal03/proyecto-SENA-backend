@@ -1,4 +1,4 @@
-import { TiposProcesos } from "../models/tipoProceso.model";
+import { TiposProcesos } from "../models/tipoProceso.model.js";
 
 export const createTipoProceso = async (req, res) => {
 

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { createLoteCafe, deleteLoteCafeById, getAllLoteCafe, getLoteCafeById, updateLoteCafeById } from '../controller/loteCafe.controller';
+import { createLoteCafe, deleteLoteCafeById, getAllLoteCafe, getLoteCafeById, updateLoteCafeById } from '../controller/loteCafe.controller.js';
 
 const lotesRouter = Router();
 
