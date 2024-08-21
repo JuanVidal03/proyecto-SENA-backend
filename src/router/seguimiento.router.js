@@ -5,7 +5,7 @@ const seguimientoRouter = Router();
 
 seguimientoRouter.post('/seguimiento', createSeguimiento);
 
-seguimientoRouter.get('/seguimiento',getAllSeguimiento );
+seguimientoRouter.get('/seguimiento', getAllSeguimiento );
 
 seguimientoRouter.get('/seguimiento/:id', getSeguimientoById );
 

@@ -1,10 +1,6 @@
-import express from 'express'
 import { Datos } from '../models/datos.js';
-const datosRouter = express.Router();
 
-
-// Ruta para crear dato
-datosRouter.post('/datos', async (req, res) => {
+export const createDatos = async (req, res) => {
     const{
         temperatura,
         temperatura_s1,
@@ -29,46 +25,38 @@ datosRouter.post('/datos', async (req, res) => {
     } catch (error) {
       res.status(400).json({ message:'Error al crear el dato',error: error.message });
     }
-  });
-  
+}
 
-// Ruta para obtener todos los datos
-datosRouter.get('/datos', async (req, res) => {
+export const getAllDatos = async (req, res) => {
     try {
       const datos = await Datos.find();
       res.json(datos);
     } catch (error) {
       res.json({ message: error.message });
     }
-  });
-  
+}
 
-// Ruta para obtener un dato por su ID
-datosRouter.get('/datos/:id', (req, res) => {
+export const getDatosById = async (req, res) => {
+    try {
+      const datos = await Datos.find();
+      res.json(datos);
+    } catch (error) {
+      res.json({ message: error.message });
+    }
+}
+
+export const updateDatos = (req, res) => {
     const { id } = req.params;
     Datos
     .findById(id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
-});
+}
 
-// Ruta para actualizar un dato por su ID
-datosRouter.put('/datos/:id',  (req, res) => {
-    const { id } = req.params;
-    const { temperatura, temperatura_s1, temperatura_s2, temperaturaPromedio, idMaquina, fecha } = req.body;
-    Datos
-    .updateOne({ _id: id }, { $set: { temperatura, temperatura_s1, temperatura_s2, temperaturaPromedio, idMaquina, fecha } })
-    .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
-});
-
-// Ruta para eliminar un dato por su ID
-datosRouter.delete('/datos/:id', (req, res) => {
+export const deleteDatos = (req, res) => {
     const { id } = req.params;
     Datos
     .deleteOne({ _id: id })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
-});
-
-export default datosRouter
+}

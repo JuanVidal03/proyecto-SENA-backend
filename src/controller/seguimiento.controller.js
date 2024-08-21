@@ -1,9 +1,15 @@
+import { Seguimiento } from "../models/seguimiento.model";
+import { Usuario } from '../models/usuarios.model.js';
+import { Maquina } from "../models/maquina.model.js";
+import { Lotes } from "../models/loteCafe.model.js";
+
+
+
 export const createSeguimiento = async (req, res) => { 
 
     const { maquina, loteCafe, operador } = req.body;
     
     try {
-
         const maquinas = await Maquina.findById(maquina);
         const loteCoffee = await Lotes.findById(loteCafe);
         const operario = await Usuario.findById(operador);
