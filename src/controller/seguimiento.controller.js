@@ -139,7 +139,11 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
         const foundMachine = await Maquina.findById(idMaquina);
         if (!foundMachine) return res.status(404).json({ message: `La maquina con id: ${idMaquina} no existe.` });
 
-        const seguimientoPorMaquina = await Seguimiento.find({ maquina: idMaquina }).populate('maquina');
+        const seguimientoPorMaquina = await Seguimiento.find({ maquina: idMaquina })
+            .populate('maquina')
+            .populate('loteCafe')
+            .populate('operador')
+            .populate('datos');
         if(seguimientoPorMaquina.length === 0) return res.status(400).json({ message: `No hay ningun seguimiento con esta maquina: ${idMaquina}.` });
 
         const seguimientoFinal = seguimientoPorMaquina[seguimientoPorMaquina.length -1];
