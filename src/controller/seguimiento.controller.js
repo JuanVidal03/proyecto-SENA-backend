@@ -142,7 +142,10 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
         const seguimientoPorMaquina = await Seguimiento.find({ maquina: idMaquina })
             .populate('maquina')
             .populate('loteCafe')
-            .populate('operador')
+            .populate({
+                path: 'operador',
+                select: '-password'
+            })
             .populate('datos');
         if(seguimientoPorMaquina.length === 0) return res.status(400).json({ message: `No hay ningun seguimiento con esta maquina: ${idMaquina}.` });
 
