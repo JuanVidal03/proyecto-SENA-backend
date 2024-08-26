@@ -3,6 +3,7 @@ import { createAccesToken } from '../utils/jwt.js';
 import { Storage } from '../models/storage.model.js';
 import uploadMiddleware from '../utils/handleStorage.js';
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
@@ -80,7 +81,7 @@ export const createLogin = async (req, res) => {
     const { email, password } = req.body;
     
     try {
-        const userFound = await Usuario.findOne({ email });
+        const userFound = await Usuario.findOne({ email }).populate("foto");
         if(!userFound) return res.status(404).json({ message: `El usuario '${email}' no existe.` });
 
         const comparePassword = await bcrypt.compare(password, userFound.password);
@@ -117,6 +118,7 @@ export const createLogin = async (req, res) => {
 
     }
 }
+
 export const getVerityToken = async (req, res) => {
 
     const { token } = req.cookies;
