@@ -1,4 +1,4 @@
-// Convertir todo a ES Modules
+
 import { app, server } from "../index.js";
 import { getAllVariedad } from "../controller/variedad.controller.js";
 import { Variedades } from "../models/variedad.model.js";
