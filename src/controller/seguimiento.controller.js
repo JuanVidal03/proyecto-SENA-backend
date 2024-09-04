@@ -3,8 +3,6 @@ import { Usuario } from '../models/usuarios.model.js';
 import { Maquina } from "../models/maquina.model.js";
 import { Lotes } from "../models/loteCafe.model.js";
 
-
-
 export const createSeguimiento = async (req, res) => { 
 
     const { maquina, loteCafe, operador } = req.body;
@@ -129,4 +127,60 @@ export const deleteSeguimientoId = async (req, res) => {
             message: `Erro al eliminar el seguimiento con id: ${id}`
         });
     }
+}
+
+
+export const getSeguimientoByMaquinaId = async(req, res) =>{
+
+    const { idMaquina } = req.params;
+
+    try {
+
+        const foundMachine = await Maquina.findById(idMaquina);
+        if (!foundMachine) return res.status(404).json({ message: `La maquina con id: ${idMaquina} no existe.` });
+
+        const seguimientoPorMaquina = await Seguimiento.find({ maquina: idMaquina })
+            .populate('maquina')
+            .populate({
+                path:'loteCafe',
+                populate:{
+                    path:'proveedor',
+                    select:'-password'
+                }
+            })
+            .populate({
+                path:'loteCafe',
+                populate:{
+                    path:'tipoProceso',
+                }
+            })
+            .populate({
+                path:'loteCafe',
+                populate:{
+                    path:'variedad',
+                }
+            })
+            .populate({
+                path: 'operador',
+                select: '-password'
+            })
+            .populate('datos');
+
+        if(seguimientoPorMaquina.length === 0) return res.status(400).json({ message: `No hay ningun seguimiento con esta maquina: ${idMaquina}.` });
+
+        const seguimientoFinal = seguimientoPorMaquina[seguimientoPorMaquina.length -1];
+
+        res.status(200).json({
+            message: "Seguimiento encontrado por maquina exitosamente.",
+            data: seguimientoFinal
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error al abtener seguimiento por maquina",
+            error: error.message
+        });
+    }
+
 }
