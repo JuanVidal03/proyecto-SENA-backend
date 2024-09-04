@@ -1,5 +1,6 @@
 import { TiposProcesos } from "../models/tipoProceso.model.js";
 import { Usuario } from '../models/usuarios.model.js';
+import { Lotes } from '../models/loteCafe.model.js';
 import { Variedades } from '../models/variedad.model.js';
 
 export const createLoteCafe =  async (req, res)=>{
