@@ -1,7 +1,7 @@
-import { app, server } from "..";
-import { Variedades } from "../models/variedad.model.js";
+// Convertir todo a ES Modules
+import { app, server } from "../index.js";
 import { getAllVariedad } from "../controller/variedad.controller.js";
-
+import { Variedades } from "../models/variedad.model.js";
 import request from "supertest";
 import mongoose from "mongoose";
 
