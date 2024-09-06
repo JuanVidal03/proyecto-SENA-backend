@@ -1,9 +1,16 @@
 import { Variedades } from '../models/variedad.model.js';
 
 export const createVariedad = async (req, res) => {
+    console.log("Request recibida:", req.body); 
     const {nombre} = req.body;
-  
+
       try {
+
+        if (!nombre){
+          return res.status(400).json({
+            message: "El nombre de la variedad es obligatorio" 
+            }); 
+        }
         const variedad = await Variedades.create({nombre});
   
         res.status(201).json({
@@ -41,6 +48,7 @@ export const getVariedadId = async (req, res) => {
     try {
       const { id } = req.params;
       const variedad = await Variedades.findById(id);
+      
   
       //verificar si la variedad existe
       if (!variedad) {

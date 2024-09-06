@@ -3,7 +3,7 @@ import { createVariedad, deleteVariedadId, getAllVariedad, getVariedadId, update
 
 const variedadesRouter = Router()
  
-variedadesRouter.post('/variadad',createVariedad)
+variedadesRouter.post('/variedad',createVariedad)
 
 // get all variedad
 variedadesRouter.get('/variedad', getAllVariedad);
