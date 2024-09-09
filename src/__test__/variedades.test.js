@@ -68,7 +68,6 @@ describe('prueba endpoint --getVariedadId--', () => {
     });
 });
 
-
 describe('prueba endpoint --createVariedad--', () => {
 
     test('Debería crear una nueva variedad y retornar 201', async () => {
@@ -162,7 +161,7 @@ describe('prueba endpoint --deleteVariedad', ()=> {
         const nonExistentId = new mongoose.Types.ObjectId();
 
         const response = await request(app)
-         .put(`/api/variedad/${nonExistentId}`)
+         .delete(`/api/variedad/${nonExistentId}`)
         
          console.log(response.body.message);
 
@@ -174,7 +173,7 @@ describe('prueba endpoint --deleteVariedad', ()=> {
         const id = null;
 
         const response = await request(app)
-         .put(`/api/variedad/${id}`)
+         .delete(`/api/variedad/${id}`)
 
         console.log(response.body.message);
 

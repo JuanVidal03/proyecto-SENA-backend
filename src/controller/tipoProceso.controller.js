@@ -57,7 +57,7 @@ export const createTipoProceso = async (req, res) => {
   
     } catch (error) {
       res.status(500).json({
-        message: "Error al obtener la variedad",
+        message: "Error al obtener el TipoProceso",
         error: error.message 
       });
     }
@@ -87,7 +87,7 @@ export const createTipoProceso = async (req, res) => {
   
     } catch (error) {
       res.status(500).json({
-        message:"Error al actualizar tipo proceso",
+        message:"Error al actualizar TipoProceso",
         error: error.message
       });
     }
