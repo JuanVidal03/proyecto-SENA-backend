@@ -8,7 +8,12 @@ from "../controller/auth.controller.js";
 
 import { Usuario } from "../models/usuarios.model.js";
 import request from "supertest";
-import mongoose from "mongoose";
+import bcrypt from 'bcrypt';
+import { createAccesToken } from '../utils/jwt.js';
+
+jest.mock('../models/usuarios.model.js');
+jest.mock('bcrypt');
+jest.mock('../utils/jwt.js');
 
 afterAll(async() => {
     await mongoose.connection.close();
@@ -137,6 +142,3 @@ describe('prueba endpoint --createRegister--', () => {
 
 });
 
-describe('prueba endpoint --createLogin--', () => {
-    
-});
