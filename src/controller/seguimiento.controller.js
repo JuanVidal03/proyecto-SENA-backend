@@ -163,7 +163,8 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
             })
             .populate({
                 path: 'operador',
-                select: '-password'
+                select: '-password',
+                populate: "foto"
             })
             .populate('datos');
 
