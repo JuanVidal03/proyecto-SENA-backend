@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import { config } from "dotenv";
 import morgan from "morgan";
 
-const app = express();
+export const app = express();
 config();
 app.use(morgan("dev"));
 
@@ -54,5 +54,5 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'almacenamiento')));
 
 
-app.listen(port, () => console.log(`Servidor corriendo en http://localhost:${port}`));
+export const server = app.listen(port, () => console.log(`Servidor corriendo en http://localhost:${port}`));
 mongoConnection();
