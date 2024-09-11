@@ -23,7 +23,7 @@ const datoSchema = new mongoose.Schema({
         required: true
     },
     fecha: {
-        type: Date,
+        type: Date, 
         default: Date.now,
         required: true
     }
