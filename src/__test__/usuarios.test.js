@@ -16,6 +16,7 @@ afterAll(async() => {
     await server.close();
 });
 
+
 describe('prueba endpoint --getAllUsuarios--', ()=>{
 
     test('should return 200 status and list of usuarios', async() => {

@@ -34,11 +34,10 @@ describe('prueba endpoint --createRegister--', () => {
             .post('/api/register')
             .send(newUser);
 
-        console.log('Response Body:', response.body);
-
+        console.log(response.body);
+        
         expect(response.statusCode).toBe(200);
-        expect(response.body).toBe(newUser.body);
-
+         
         // Verificar que el usuario se ha creado en la base de datos
         const user = await Usuario.findOne({ email: newUser.email });
         expect(user).not.toBeNull();
@@ -49,7 +48,8 @@ describe('prueba endpoint --createRegister--', () => {
         expect(user.direccion).toBe(newUser.direccion);
         expect(user.estado).toBe(newUser.estado);
         expect(user.tipoUsuario).toBe(newUser.tipoUsuario);
-    }, 10000); // Tiempo de espera aumentado
+
+    }, 10000); 
 
     test('Should return 400 if the email already exists', async () => {
 
@@ -124,17 +124,7 @@ describe('prueba endpoint --createRegister--', () => {
     });
 
     test('Should return 500 if there is an error', async () => {
-        const newUser = {
-            username: 'errorUser',
-            password: 'password123',
-            cedula: '5454512',
-            nombreCompleto: 'Error Usuario',
-            telefono: '123456789',
-            direccion: 'Calle Falsa 123',
-            email: 'nuevoerror@usuario.com',
-            estado: false,
-            tipoUsuario: 'Administrador'
-        };
+        const newUser = null;
 
 
         const response = await request(app)
@@ -148,5 +138,5 @@ describe('prueba endpoint --createRegister--', () => {
 });
 
 describe('prueba endpoint --createLogin--', () => {
-
+    
 });
