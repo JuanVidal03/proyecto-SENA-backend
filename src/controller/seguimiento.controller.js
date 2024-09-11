@@ -145,7 +145,8 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
                 path:'loteCafe',
                 populate:{
                     path:'proveedor',
-                    select:'-password'
+                    select:'-password',
+                    populate: 'foto'
                 }
             })
             .populate({
@@ -162,7 +163,8 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
             })
             .populate({
                 path: 'operador',
-                select: '-password'
+                select: '-password',
+                populate: "foto"
             })
             .populate('datos');
 
