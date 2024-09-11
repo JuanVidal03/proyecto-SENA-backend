@@ -37,7 +37,10 @@ export const getAllLoteCafe = async (req, res) => {
         .populate('variedad')
         .populate({
             path: 'proveedor',
-            select: '-password'
+            select: '-password',
+            populate: {
+                path: "foto",
+            },
         });
 
         res.status(200).json({ message: "Lotes encontrados exitosamente.", lotesCafe });
