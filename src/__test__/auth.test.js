@@ -11,10 +11,6 @@ import request from "supertest";
 import bcrypt from 'bcrypt';
 import { createAccesToken } from '../utils/jwt.js';
 
-jest.mock('../models/usuarios.model.js');
-jest.mock('bcrypt');
-jest.mock('../utils/jwt.js');
-
 afterAll(async() => {
     await mongoose.connection.close();
     await server.close();

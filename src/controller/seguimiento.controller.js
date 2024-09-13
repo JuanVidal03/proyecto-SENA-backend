@@ -92,7 +92,7 @@ export const updatedSeguimientoById =async (req, res) => {
         const operario = await Usuario.findById(operador);
 
         if(!machine) return res.status(404).json({ message: `La maquina con id: ${maquina} no existe.` });
-        if(!loteCafe) return res.status(404).json({ message: `El loteCafe con id: ${loteCoffee} no existe.` });
+        if(!loteCoffee) return res.status(404).json({ message: `El loteCafe con id: ${loteCoffee} no existe.` });
         if(!operario) return res.status(404).json({ message: `El operario con id: ${operador} no existe.` });
 
         const updatedSeguimiento = await Seguimiento.findByIdAndUpdate(id, { maquina, loteCafe, operador }, { new:true });

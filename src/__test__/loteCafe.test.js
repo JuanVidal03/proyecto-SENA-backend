@@ -18,162 +18,162 @@ afterAll(async() => {
 });
 
 
-// describe('prueba endpoint --getAllLoteCafe--', () => {
+describe('prueba endpoint --getAllLoteCafe--', () => {
 
-//     test('should return 200 and list of loteCafe', async() => {
+    test('should return 200 and list of loteCafe', async() => {
 
-//         const response = await request(app).get("/api/loteCafe");
-//         console.log(response.body);
+        const response = await request(app).get("/api/loteCafe");
+        console.log(response.body);
 
-//         expect(response.statusCode).toBe(200);
-//     });
+        expect(response.statusCode).toBe(200);
+    });
 
     
-//     test('should return 500 if there is an error', async() => {
+    test('should return 500 if there is an error', async() => {
 
-//         const response = await request(app).get("/api/loteCafe");
-//         console.log(response.message);
+        const response = await request(app).get("/api/loteCafe");
+        console.log(response.message);
 
-//         expect(response.statusCode).toBe(500);
-//     });
+        expect(response.statusCode).toBe(500);
+    });
     
-// });
+});
 
-// describe('prueba endpoint --getLoteCafeById--', () => {
+describe('prueba endpoint --getLoteCafeById--', () => {
    
-//     test('should return 200 and show the correct loteCafe', async() => {
-//         const id = '66bcb9d0ddc717a8222045f5';
-//         const response = await request(app).get(`/api/loteCafe/${id}`)
+    test('should return 200 and show the correct loteCafe', async() => {
+        const id = '66bcb9d0ddc717a8222045f5';
+        const response = await request(app).get(`/api/loteCafe/${id}`)
 
-//         console.log(response.body);
+        console.log(response.body);
     
-//         expect(response.statusCode).toBe(200);
-//     });
+        expect(response.statusCode).toBe(200);
+    });
 
-//     test('should return 404 if id is not found', async() => {
-//         const nonExistentId = new mongoose.Types.ObjectId();
+    test('should return 404 if id is not found', async() => {
+        const nonExistentId = new mongoose.Types.ObjectId();
 
-//         const response = await request(app).get(`/api/loteCafe/${nonExistentId}`)
+        const response = await request(app).get(`/api/loteCafe/${nonExistentId}`)
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
 
-//         expect(response.statusCode).toBe(404);
-//     });
+        expect(response.statusCode).toBe(404);
+    });
 
-//     test('should return 500 if there is an error', async() => {
-//         const idnull = null;
+    test('should return 500 if there is an error', async() => {
+        const idnull = null;
 
-//         const response = await request(app).get(`/api/loteCafe/${idnull}`)
+        const response = await request(app).get(`/api/loteCafe/${idnull}`)
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
 
-//         expect(response.statusCode).toBe(500);
-//     });
-// });
+        expect(response.statusCode).toBe(500);
+    });
+});
 
-// describe ('prueba endpoint --createLoteCafe', () => {
+describe ('prueba endpoint --createLoteCafe', () => {
 
-//     test('should return 201 and create a new LoteCafe', async() => {
-//         const newLoteCafe = {
-//             peso : 80,
-//             proveedor:'66e0e59f03147f34dcce9926',
-//             tipoProceso:'66bcad740a9ac2dca24ae00c',
-//             variedad:'66bcb353f1d5eddcc8be7b57',
-//         }
+    test('should return 201 and create a new LoteCafe', async() => {
+        const newLoteCafe = {
+            peso : 80,
+            proveedor:'66e0e59f03147f34dcce9926',
+            tipoProceso:'66bcad740a9ac2dca24ae00c',
+            variedad:'66bcb353f1d5eddcc8be7b57',
+        }
         
-//         const response = await request(app)
-//         .post("/api/loteCafe")
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post("/api/loteCafe")
+        .send(newLoteCafe);
 
-//         console.log(response.body);
+        console.log(response.body);
 
-//         expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(201);
 
-//     });
+    });
 
-//     test('should return 400 if usuario is not type:proveedor', async () => {
-//         const newLoteCafe = {
-//             peso : 80,
-//             proveedor:'66ba187174de72f45f4a9a81',
-//             tipoProceso:'66bcad740a9ac2dca24ae00c',
-//             variedad:'66bcb353f1d5eddcc8be7b57',
-//         }
+    test('should return 400 if usuario is not type:proveedor', async () => {
+        const newLoteCafe = {
+            peso : 80,
+            proveedor:'66ba187174de72f45f4a9a81',
+            tipoProceso:'66bcad740a9ac2dca24ae00c',
+            variedad:'66bcb353f1d5eddcc8be7b57',
+        }
 
-//         const response = await request(app)
-//         .post("/api/loteCafe")
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post("/api/loteCafe")
+        .send(newLoteCafe);
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
         
-//         expect(response.statusCode).toBe(400);
-//     });
+        expect(response.statusCode).toBe(400);
+    });
 
-//     test('should return 404 if proveedor does not exist', async () => {
-//         const nonExistentProveedor = new mongoose.Types.ObjectId(); 
-//         const newLoteCafe = {
-//             peso : 80,
-//             proveedor: `${nonExistentProveedor}`,
-//             tipoProceso:'66bcad740a9ac2dca24ae00c',
-//             variedad:'66bcb353f1d5eddcc8be7b57',
-//         }
+    test('should return 404 if proveedor does not exist', async () => {
+        const nonExistentProveedor = new mongoose.Types.ObjectId(); 
+        const newLoteCafe = {
+            peso : 80,
+            proveedor: `${nonExistentProveedor}`,
+            tipoProceso:'66bcad740a9ac2dca24ae00c',
+            variedad:'66bcb353f1d5eddcc8be7b57',
+        }
         
-//         const response = await request(app)
-//         .post("/api/loteCafe")
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post("/api/loteCafe")
+        .send(newLoteCafe);
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
         
-//         expect(response.statusCode).toBe(404);
-//     });
+        expect(response.statusCode).toBe(404);
+    });
 
-//     test('should return 404 if tipoProceso does not exist', async () => {
-//         const nonExistentTipoProceso = new mongoose.Types.ObjectId(); 
-//         const newLoteCafe = {
-//             peso : 80,
-//             proveedor: '66e0e59f03147f34dcce9926',
-//             tipoProceso:`${nonExistentTipoProceso}`,
-//             variedad:'66bcb353f1d5eddcc8be7b57',
-//         }
+    test('should return 404 if tipoProceso does not exist', async () => {
+        const nonExistentTipoProceso = new mongoose.Types.ObjectId(); 
+        const newLoteCafe = {
+            peso : 80,
+            proveedor: '66e0e59f03147f34dcce9926',
+            tipoProceso:`${nonExistentTipoProceso}`,
+            variedad:'66bcb353f1d5eddcc8be7b57',
+        }
         
-//         const response = await request(app)
-//         .post("/api/loteCafe")
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post("/api/loteCafe")
+        .send(newLoteCafe);
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
         
-//         expect(response.statusCode).toBe(404);
-//     });
+        expect(response.statusCode).toBe(404);
+    });
 
-//     test('should return 404 if variedad does not exist', async () => {
-//         const nonExistentVariedad = new mongoose.Types.ObjectId(); 
-//         const newLoteCafe = {
-//             peso : 80,
-//             proveedor: '66e0e59f03147f34dcce9926',
-//             tipoProceso:'66bcad740a9ac2dca24ae00c',
-//             variedad:`${nonExistentVariedad}`,
-//         }
+    test('should return 404 if variedad does not exist', async () => {
+        const nonExistentVariedad = new mongoose.Types.ObjectId(); 
+        const newLoteCafe = {
+            peso : 80,
+            proveedor: '66e0e59f03147f34dcce9926',
+            tipoProceso:'66bcad740a9ac2dca24ae00c',
+            variedad:`${nonExistentVariedad}`,
+        }
         
-//         const response = await request(app)
-//         .post("/api/loteCafe")
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post("/api/loteCafe")
+        .send(newLoteCafe);
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
         
-//         expect(response.statusCode).toBe(404);
-//     });
+        expect(response.statusCode).toBe(404);
+    });
 
-//     test('should return 500 if there is an error', async () => {
-//         const newLoteCafe = '';
+    test('should return 500 if there is an error', async () => {
+        const newLoteCafe = '';
         
-//         const response = await request(app)
-//         .post('/api/loteCafe')
-//         .send(newLoteCafe);
+        const response = await request(app)
+        .post('/api/loteCafe')
+        .send(newLoteCafe);
 
-//         console.log(response.body.message);
+        console.log(response.body.message);
 
-//         expect(response.statusCode).toBe(500);
-//     });
-// });
+        expect(response.statusCode).toBe(500);
+    });
+});
 
 describe('prueba endpoint --updateLoteCafeById',() => {
 
@@ -281,3 +281,42 @@ describe('prueba endpoint --updateLoteCafeById',() => {
         expect(response.statusCode).toBe(500);
     });
 });
+
+describe('prueba endpoint --deleteLoteCafeById',() => {
+
+    test ('should return 200 and delete the correct loteCafe', async () => {
+        const id = '66e1cde783b3c29a4bf68b7d';
+
+        const response = await request(app)
+        .delete(`/api/loteCafe/${id}`);
+
+        console.log(response.body.message);
+
+        expect(response.statusCode).toBe(200);
+    });
+
+    test('Should return 404 if id deoes not exist', async () => {
+        const nonExistentId = new mongoose.Types.ObjectId();
+        
+        const response = await request(app)
+        .delete(`/api/loteCafe/${nonExistentId}`);
+
+        console.log(response.body.message);
+
+        expect(response.statusCode).toBe(404);
+        
+    });
+
+    test('Should return 500 if there is an error', async () => {
+        const id = null;
+
+        const response = await request(app)
+        .delete(`/api/loteCafe/${id}`);
+
+        console.log(response.body.message);
+
+        expect(response.statusCode).toBe(500);
+
+    });
+});
+
