@@ -78,7 +78,7 @@ export const createTipoProceso = async (req, res) => {
       }
   
       // Actualizar el tipo de proceso
-      const updatedTipoProceso = await TiposProcesos.updateOne({ _id: id }, { $set: { nombre,descripcion } });
+      const updatedTipoProceso = await TiposProcesos.findByIdAndUpdate(id, { nombre, descripcion }, { new: true });
       
       res.status(200).json({
         message: "Tipo de proceso actualizado correctamente",
