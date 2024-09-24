@@ -16,7 +16,7 @@ const usuarioSchema = new mongoose.Schema({
     unique: true
   },
   nombreCompleto: {
-    type: String,
+    type: String, 
     required: true
   },
   telefono: {
