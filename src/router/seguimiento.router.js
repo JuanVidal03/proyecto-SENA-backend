@@ -5,7 +5,8 @@ import {
     getAllSeguimiento,
     getSeguimientoById,
     updatedSeguimientoById,
-    getSeguimientoByMaquinaId
+    getSeguimientoByMaquinaId,
+    finishSeguimiento
 } from '../controller/seguimiento.controller.js';
 
 const seguimientoRouter = Router();
@@ -21,5 +22,7 @@ seguimientoRouter.get('/seguimiento/maquina/:idMaquina', getSeguimientoByMaquina
 seguimientoRouter.put('/seguimiento/:id',updatedSeguimientoById );
 
 seguimientoRouter.delete('/seguimiento/:id',deleteSeguimientoId);
+
+seguimientoRouter.put('/seguimiento/finalizar/:idSeguimiento',finishSeguimiento);
 
 export default seguimientoRouter;

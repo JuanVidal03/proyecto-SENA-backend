@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const datoSchema = new mongoose.Schema({
+    seguimiento:{
+        type:mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
     temperaturaAmbiente: {
         type: String,
         required: true

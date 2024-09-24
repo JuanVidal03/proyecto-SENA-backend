@@ -186,3 +186,28 @@ export const getSeguimientoByMaquinaId = async(req, res) =>{
     }
 
 }
+
+export const finishSeguimiento = async(req,res)=>{
+    const {idSeguimiento} = req.params;
+
+    try {
+        const seguimiento = await Seguimiento.findById(id).populate('maquina')
+        if(!seguimiento) return res.status(404).json({ message: `El seguimiento con id: ${id} no existe.` });
+        
+         // Encontrar la máquina asociada
+        const maquina = await Maquina.findById(seguimiento.maquina._id);
+
+        if (!maquina) {
+        return res.status(404).json({ message: 'Máquina no encontrada' });
+        }
+
+        // Cambiar el estado de la máquina a "Inactivo"
+        maquina.estado = 'Inactivo';
+        await maquina.save();
+
+        return res.status(200).json({ message: 'Seguimiento finalizado y máquina inactivada correctamente' });
+
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al finalizar el seguimiento' });
+    }
+}
