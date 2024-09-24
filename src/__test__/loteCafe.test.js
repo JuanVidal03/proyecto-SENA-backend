@@ -28,11 +28,10 @@ describe('prueba endpoint --getAllLoteCafe--', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    
     test('should return 500 if there is an error', async() => {
 
         const response = await request(app).get("/api/loteCafe");
-        console.log(response.message);
+        console.log(response.body.message);
 
         expect(response.statusCode).toBe(500);
     });
@@ -42,7 +41,7 @@ describe('prueba endpoint --getAllLoteCafe--', () => {
 describe('prueba endpoint --getLoteCafeById--', () => {
    
     test('should return 200 and show the correct loteCafe', async() => {
-        const id = '66bcb9d0ddc717a8222045f5';
+        const id = '66e1c9f083b3c29a4bf68b3c';
         const response = await request(app).get(`/api/loteCafe/${id}`)
 
         console.log(response.body);
@@ -163,7 +162,7 @@ describe ('prueba endpoint --createLoteCafe', () => {
     });
 
     test('should return 500 if there is an error', async () => {
-        const newLoteCafe = '';
+        const newLoteCafe = null;
         
         const response = await request(app)
         .post('/api/loteCafe')
@@ -178,7 +177,7 @@ describe ('prueba endpoint --createLoteCafe', () => {
 describe('prueba endpoint --updateLoteCafeById',() => {
 
     test('should return 200 and update the loteCafe' , async () => {
-        const id='66e1c9f083b3c29a4bf68b3c'
+        const id='66f2c5953b4577f277b3e629'
         const updateLoteCafe = { 
             peso : 70,
             proveedor:'66e0e59f03147f34dcce9926',
@@ -210,8 +209,8 @@ describe('prueba endpoint --updateLoteCafeById',() => {
     });
 
     test('should return 400 if usuario is not type:proveedor', async () => {
-        const id='66e1c9f083b3c29a4bf68b3c'
-        const updateLoteCafe = { proveedor:'66ba187174de72f45f4a9a81' } // id de un usuario de tipo administrador
+        const id='66f2c5953b4577f277b3e629'
+        const updateLoteCafe = { proveedor:'66ba19a8bdfec4a672bb4727' } // id de un usuario de tipo administrador
 
         const response = await request(app)
         .put(`/api/loteCafe/${id}`)
@@ -221,7 +220,6 @@ describe('prueba endpoint --updateLoteCafeById',() => {
         
         expect(response.statusCode).toBe(400);
     });
-
 
     test('should return 404 if proveedor does not exist', async () => {
         const id = '66e1c9f083b3c29a4bf68b3c';
@@ -285,7 +283,7 @@ describe('prueba endpoint --updateLoteCafeById',() => {
 describe('prueba endpoint --deleteLoteCafeById',() => {
 
     test ('should return 200 and delete the correct loteCafe', async () => {
-        const id = '66e1cde783b3c29a4bf68b7d';
+        const id = '66f2c585f3162a0852fa6abf';
 
         const response = await request(app)
         .delete(`/api/loteCafe/${id}`);
@@ -318,5 +316,5 @@ describe('prueba endpoint --deleteLoteCafeById',() => {
         expect(response.statusCode).toBe(500);
 
     });
-});
+},10000);
 

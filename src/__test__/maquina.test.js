@@ -9,7 +9,7 @@ from "../controller/maquina.controller.js";
 
 import { Maquina } from "../models/maquina.model.js";
 import request from "supertest";
-import mongoose from "mongoose";
+import mongoose, { Error } from "mongoose";
 
 
 afterAll(async() => {
@@ -30,6 +30,8 @@ describe('prueba endpoint --getAllMaquinas--', ()=>{
     test('should return 500 if error is returned', async() => {
         const response = await request(app).get("/api/maquinas")
 
+        console.log(response.body.message);
+
         expect(response.statusCode).toBe(500);
 
     });
@@ -49,7 +51,6 @@ describe('prueba endpoint --getMaquinaById--', () => {
     test('should return 400 if maquinas does not exist', async () => {
 
         const nonExistentId = new mongoose.Types.ObjectId(); // Genera un ObjectId válido pero que no existe en la base de datos
-        console.log(nonExistentId)
 
         const response = await request(app).get(`/api/maquinas/${nonExistentId}`);
 
@@ -71,20 +72,21 @@ describe('prueba endpoint --getMaquinaById--', () => {
 describe('prueba endpoint --createMaquina--', () => {
 
     test('Debería crear una nueva maquinas y retornar 201', async () => {
-        
+       
         const response = await request(app)
-          .post('/api/maquinas')  
-          
+          .post('/api/maquinas')
+           
         console.log(response.body);
     
         expect(response.statusCode).toBe(201);
     });
 
     test('Should return 500 if there is an error', async () => {
-
+        
         const response = await request(app)
         .post('/api/maquinas')
-
+        
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
     })
  
@@ -93,7 +95,7 @@ describe('prueba endpoint --createMaquina--', () => {
 describe('prueba endpoint --updateMaquina--', () => {
 
     test('Should return 200 and update the maquinas', async () => {
-        const id = '66def67a4ba3b5250efb8aa6';
+        const id = '66f2cb2f4c3dbcb0da795f4a';
         const updatedMaquina = { estado: "En Mantenimiento" };
 
         const response = await request(app)
@@ -139,7 +141,7 @@ describe('prueba endpoint --updateMaquina--', () => {
 describe('prueba endpoint --deleteMaquina', ()=> {
 
     test('Should return 200 and delete maquinas', async () =>{
-        const id = '66def6c9e5ba8957ac378718';
+        const id = '66f2cb190797d381b610ccbe';
         
         const response = await request(app).delete(`/api/maquinas/${id}`);
         console.log(response.body.message);

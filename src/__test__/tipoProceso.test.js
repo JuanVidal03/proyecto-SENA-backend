@@ -30,6 +30,7 @@ describe('prueba endpoint --getAlltipoProceso--', ()=>{
     test('should return 500 if error is returned', async() => {
         const response = await request(app).get("/api/tipoProceso")
 
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
 
     });
@@ -48,7 +49,7 @@ describe('prueba endpoint --getTipoProcesoById--', () => {
 
     test('should return 404 if tipoProceso does not exist', async () => {
 
-        const nonExistentId = new mongoose.Types.ObjectId(); // Genera un ObjectId válido pero que no existe en la base de datos
+        const nonExistentId = new mongoose.Types.ObjectId();
         console.log(nonExistentId)
 
         const response = await request(app).get(`/api/tipoProceso/${nonExistentId}`);
@@ -89,6 +90,7 @@ describe('prueba endpoint --createTipoProceso--', () => {
         const response = await request(app)
         .post('/api/tipoProceso')
 
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
     })
  
@@ -97,7 +99,7 @@ describe('prueba endpoint --createTipoProceso--', () => {
 describe('prueba endpoint --updateTipoProcesoById--', () => {
 
     test('Should return 200 and update the tipoProceso', async () => {
-        const id = '66defc8b665281eb3da4bf20';
+        const id = '66f2d572173fe1a5273958df';
         const updateTipoProceso = { nombre: "tipoProceso4" };
 
         const response = await request(app)
@@ -143,7 +145,7 @@ describe('prueba endpoint --updateTipoProcesoById--', () => {
 describe('prueba endpoint --deletetipoProcesoId', ()=> {
 
     test('Should return 200 and delete tipoProceso', async () =>{
-        const id = '66defc8b665281eb3da4bf20';
+        const id = '66f2d594e12c3233e32433cc';
         
         const response = await request(app).delete(`/api/tipoProceso/${id}`);
         console.log(response.body.message);

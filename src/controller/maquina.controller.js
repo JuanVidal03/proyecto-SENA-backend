@@ -3,7 +3,7 @@ import { Maquina } from "../models/maquina.model.js";
 export const createMaquina = async(req, res) => {
 
     try {
-
+     
       const allMaquinas = await Maquina.find({});
 
       const maquinaSchema = {
@@ -26,7 +26,7 @@ export const createMaquina = async(req, res) => {
 
 export const getAllMaquinas = async(req, res) => {
     try {
-
+      
       const maquinas = await Maquina.find();
       res.status(200).json({
         message: "Maquinas encontradas exitosamente.",

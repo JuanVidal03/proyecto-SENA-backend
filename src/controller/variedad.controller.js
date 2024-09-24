@@ -5,6 +5,7 @@ export const createVariedad = async (req, res) => {
     const {nombre} = req.body;
 
       try {
+        
 
         if (!nombre){
           return res.status(400).json({
@@ -29,6 +30,8 @@ export const createVariedad = async (req, res) => {
 export const getAllVariedad = async (req, res) => {
 
     try {
+      
+      
       const variedades = await Variedades.find();
 
       res.status(200).json({

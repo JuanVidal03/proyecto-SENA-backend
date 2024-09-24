@@ -30,6 +30,7 @@ describe('prueba endpoint --getAllVariedad--', ()=>{
     test('should return 500 if error is returned', async() => {
         const response = await request(app).get("/api/variedad")
 
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
 
     });
@@ -39,7 +40,7 @@ describe('prueba endpoint --getAllVariedad--', ()=>{
 describe('prueba endpoint --getVariedadId--', () => {
 
     test('Should return 200 and show the variedad',async () => {
-        const id = '66daff98f6ce06d51ca0d4cd'
+        const id = '66bcb358f1d5eddcc8be7b59'
         const response = await request(app).get(`/api/variedad/${id}`);
         console.log(response.body);
 
@@ -64,6 +65,7 @@ describe('prueba endpoint --getVariedadId--', () => {
         const idnull = null;
         const response = await request(app).get(`/api/variedad/${idnull}`)
 
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
     });
 });
@@ -91,19 +93,23 @@ describe('prueba endpoint --createVariedad--', () => {
     });
 
     test('Should return 500 if there is an error', async () => {
+        const newVariedad = null;
 
         const response = await request(app)
         .post('/api/variedad')
+        .send(newVariedad)
+
+        console.log(response.body.message);
 
         expect(response.statusCode).toBe(500);
-    })
+    });
  
 });
 
 describe('prueba endpoint --updateVariedad--', () => {
 
     test('Should return 200 and update the variedad', async () => {
-        const id = '66db38c9cb24550c028c6263';
+        const id = '66f2dce6d945e34c086f28e7';
         const updatedVariedad = { nombre: 'Updated Variedad' };
 
         const response = await request(app)
@@ -149,7 +155,7 @@ describe('prueba endpoint --updateVariedad--', () => {
 describe('prueba endpoint --deleteVariedad', ()=> {
 
     test('Should return 200 and delete variedad', async () =>{
-        const id = '66db396d3b6f03e04dc858dd';
+        const id = '66f2dd4766d935c03cf06d47';
         
         const response = await request(app).delete(`/api/variedad/${id}`);
         console.log(response.body.message);

@@ -10,6 +10,7 @@ import { Usuario } from "../models/usuarios.model.js";
 import request from "supertest";
 import bcrypt from 'bcrypt';
 import { createAccesToken } from '../utils/jwt.js';
+import mongoose from "mongoose";
 
 afterAll(async() => {
     await mongoose.connection.close();
@@ -50,7 +51,7 @@ describe('prueba endpoint --createRegister--', () => {
         expect(user.estado).toBe(newUser.estado);
         expect(user.tipoUsuario).toBe(newUser.tipoUsuario);
 
-    }, 10000); 
+    }, 20000); 
 
     test('Should return 400 if the email already exists', async () => {
 
@@ -136,5 +137,5 @@ describe('prueba endpoint --createRegister--', () => {
         expect(response.body.message).toBe('Error al crear el usuario');
     });
 
-});
+},10000);
 

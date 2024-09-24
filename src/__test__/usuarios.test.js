@@ -30,6 +30,7 @@ describe('prueba endpoint --getAllUsuarios--', ()=>{
     test('should return 500 if error is returned', async() => {
         const response = await request(app).get("/api/usuarios")
 
+        console.log(response.body.message);
         expect(response.statusCode).toBe(500);
 
     });
@@ -56,7 +57,7 @@ describe('prueba endpoint --getUsuarioByID--', () => {
         console.log(response.body.message);
 
         expect(response.statusCode).toBe(404);
-      });
+    });
     
     
     test('should return 500 if there is an error', async () => {
@@ -117,7 +118,7 @@ describe('prueba endpoint --actualizarUsuario--', () => {
 describe('prueba endpoint --borrarUsuario', ()=> {
 
     test('Should return 200 and delete usuario', async () =>{
-        const id = '66df02c158e71ba3931d6503';
+        const id = '66ee054185567bda56dc6fb7';
         
         const response = await request(app).delete(`/api/usuarios/${id}`);
         console.log(response.body.message);
