@@ -15,13 +15,13 @@ export const createDatos = async (req, res) => {
   try {
     //Crear el nuevo dato
     const nuevoDato = new Datos({
-      IdSeguimiento,
-      temperaturaAmbiente,
-      temperaturaSensor,
-      idMaquina,
-      rotor,
-      motor,
-      fecha,
+      seguimiento:IdSeguimiento,
+      temperaturaAmbiente:temperaturaAmbiente,
+      temperaturaSensor:temperaturaSensor,
+      maquina:idMaquina,
+      rotor:rotor,
+      motor:motor,
+      fecha:fecha,
     });
 
     //Guardar el dato en la base de datos
