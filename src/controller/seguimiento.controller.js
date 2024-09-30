@@ -37,7 +37,14 @@ export const getAllSeguimiento = async (req, res) => {
 
         const seguimientos = await Seguimiento.find({})
             .populate('maquina') 
-            .populate('loteCafe')
+            .populate({
+                path: 'loteCafe',
+                populate: [
+                    { path: 'proveedor' },
+                    { path: 'tipoProceso' },
+                    { path: 'variedad' },
+                ]
+            })
             .populate({
                 path: 'operador',
                 select: '-password'
